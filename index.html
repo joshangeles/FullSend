@@ -11,35 +11,82 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 <body>
-  <header class="bg-body-tertiary">
+  <header class="bg-body-secondary">
     <div class="container">
       <div class="row gx-5">
         <nav class="navbar navbar-expand-md px-4">
           <div class="container-fluid">
-            <h4 class="navbar-text text-white gy-0 mb-0">FullSend</h4>
-            <input type="button" value="Saved Events" class="navbar-text text-body-tertiary bg-body-tertiary border-0"></input>
+            <h5 class="navbar-text text-white gy-0 mb-0">FullSend</h5>
+            <input type="button" value="Saved Events" class="navbar-text text-body-tertiary bg-body-secondary border-0"></input>
         </nav>
       </div>
     </div>
   </header>
   <main class="bg-white">
     <div class="container" data-view="form">
-      <h2 class="text-black px-3 py-2">
-        Next Full Send
-      </h2>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm pe-md-5 overflow-auto">
-            <img class="object-fit-fill img-fluid" src="https://raw.githubusercontent.com/joshangeles/code-journal/main/images/placeholder-image-square.jpg">
+      <div class="row">
+        <div class="col-12">
+          <h4 class="text-black px-3 py-2">
+            Next Full Send
+          </h4>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="container-fluid">
+          <div class="row mb-4">
+            <div class="col-sm pe-md-5 overflow-auto">
+              <img class="object-fit-fill img-fluid" src="https://raw.githubusercontent.com/joshangeles/code-journal/main/images/placeholder-image-square.jpg">
+            </div>
+            <div class="col ps-md-5">
+              <form>
+                <label for="searchLabel" class="text-black fw-semibold mt-2 mt-sm-0">Sending it to...</label>
+                <input required id="searchLabel" class="text-black fw-normal form-control bg-white mt-2 mb-3" type="text" placeholder="Enter Artist...">
+                <div class="d-grid col-2 col-sm-12">
+                  <button id="searchButton" class="text-white bg-secondary border-0 rounded px-4 py-1 py-md-2" type="submit" value="Search">Search</button>
+                </div>
+              </form>
+            </div>
           </div>
-          <div class="col ps-md-5">
-            <form>
-              <label for="searchLabel" class="text-black fw-semibold mt-2 mt-sm-0">Sending it to...</label>
-              <input required id="searchLabel" class="text-black fw-normal form-control bg-white mt-2 mb-3" type="text" placeholder="Enter Artist...">
-              <div class="d-grid col-2 col-lg-12">
-                <button id="searchButton" class="text-white bg-secondary border-0 rounded px-4 py-md-1" type="submit" value="Search">Search</button>
+          <div class="row bg-light gx-2 mt-2">
+            <div class="col">
+              <div class="container">
+                <div class="row">
+                  <div class="col-12">
+                    <h6 class="text-black pt-2">Event Information:</h6>
+                  </div>
+                  <div class="col-6">
+                    <p class="text-black">Artist:</p>
+                  </div>
+                  <div class="col-6">
+                    <p class="text-black text-end invisible">placeholder</p>
+                  </div>
+                  <div class="col-6">
+                    <p class="text-black">Name:</p>
+                  </div>
+                  <div class="col-6">
+                    <p class="text-black text-end invisible">placeholder</p>
+                  </div>
+                  <div class="col-6">
+                    <p class="text-black">Venue:</p>
+                  </div>
+                  <div class="col-6">
+                    <p class="text-black text-end invisible">placeholder</p>
+                  </div>
+                  <div class="col-6">
+                    <p class="text-black">Address:</p>
+                  </div>
+                  <div class="col-6">
+                    <p class="text-black text-end invisible">placeholder</p>
+                  </div>
+                  <div class="col-6">
+                    <p class="text-black">Date:</p>
+                  </div>
+                  <div class="col-6">
+                    <p class="text-black text-end invisible">placeholder</p>
+                  </div>
+                </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
