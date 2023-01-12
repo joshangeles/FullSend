@@ -2,6 +2,10 @@
   font-family: Roboto, sans-serif;
 }
 
+a:hover {
+  cursor: pointer;
+}
+
 img {
-  max-width: 325px;
+  width: 100%;
 }
