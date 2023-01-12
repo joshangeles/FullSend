@@ -10,7 +10,8 @@ var data = {
     venue: null,
     address: null,
     eventURL: null,
-    imageURL: null
+    imageURL: null,
+    eventId: null
   },
   nextEventId: 1
 };
