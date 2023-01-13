@@ -15,3 +15,13 @@ var data = {
   },
   nextEventId: 1
 };
+
+window.addEventListener('beforeunload', function () {
+  var eventDataJSON = JSON.stringify(data);
+  this.localStorage.setItem('eventData', eventDataJSON);
+});
+
+var savedData = window.localStorage.getItem('eventData');
+if (savedData !== null) {
+  data = JSON.parse(savedData);
+}
