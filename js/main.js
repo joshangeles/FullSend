@@ -4,6 +4,7 @@ var $previewImage = document.querySelector('#previewImage');
 var $eventInfo = document.querySelectorAll('.data-placeholder');
 var $modalLink = document.querySelector('#modalLink');
 var $saveButton = document.querySelector('#saveButton');
+var $cancelButton = document.querySelector('#cancelButton');
 var $fullSendButton = document.querySelector('#fullSendButton');
 var validSearch = false;
 function toggleVisible(index) {
@@ -65,7 +66,7 @@ function searchHandler(event, name) {
   validSearch = true;
 }
 
-function saveHandler(event) {
+function resetInfo() {
   for (var i = 0; i < $eventInfo.length; i++) {
     if ($eventInfo[i].tagName === 'P') {
       if ($eventInfo[i].textContent === data.currentEvent.artist) {
@@ -89,6 +90,10 @@ function saveHandler(event) {
   }
   $previewImage.setAttribute('src', 'https://www.caliberwealthmanagement.com/images/placeholder-rectangle.png');
   $searchForm.reset();
+}
+
+function saveHandler(event) {
+  resetInfo();
   if (data.currentEvent.artist === undefined) {
     return;
   }
@@ -105,3 +110,7 @@ $fullSendButton.addEventListener('click', function () {
   }
 });
 $saveButton.addEventListener('click', saveHandler);
+$cancelButton.addEventListener('click', function () {
+  resetInfo();
+  data.currentEvent = {};
+});
