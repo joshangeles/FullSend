@@ -2,6 +2,8 @@ var $searchForm = document.querySelector('#searchForm');
 var $searchInput = $searchForm.querySelector('#searchInput');
 var $previewImage = document.querySelector('#previewImage');
 var $eventInfo = document.querySelectorAll('.data-placeholder');
+var $modalLink = document.querySelector('#modalLink');
+var $saveButton = document.querySelector('#saveButton');
 var $fullSendButton = document.querySelector('#fullSendButton');
 var validSearch = false;
 function toggleVisible(index) {
@@ -20,6 +22,7 @@ function toggleVisible(index) {
     }
   }
 }
+
 function searchHandler(event, name) {
   event.preventDefault();
   name = $searchInput.value;
@@ -61,9 +64,8 @@ function searchHandler(event, name) {
   xhr.send();
   validSearch = true;
 }
-$searchForm.addEventListener('submit', searchHandler);
 
-function fullSendHandler(event) {
+function saveHandler(event) {
   for (var i = 0; i < $eventInfo.length; i++) {
     if ($eventInfo[i].tagName === 'P') {
       if ($eventInfo[i].textContent === data.currentEvent.artist) {
@@ -84,13 +86,22 @@ function fullSendHandler(event) {
     if (validSearch === true) {
       toggleVisible(i);
     }
-    $previewImage.setAttribute('src', 'https://www.caliberwealthmanagement.com/images/placeholder-rectangle.png');
-    $searchForm.reset();
+  }
+  $previewImage.setAttribute('src', 'https://www.caliberwealthmanagement.com/images/placeholder-rectangle.png');
+  $searchForm.reset();
+  if (data.currentEvent.artist === undefined) {
+    return;
   }
   data.currentEvent.eventId = data.nextEventId;
   data.nextEventId++;
   data.events.push(data.currentEvent);
   data.currentEvent = {};
 }
-
-$fullSendButton.addEventListener('click', fullSendHandler);
+$searchForm.addEventListener('submit', searchHandler);
+$fullSendButton.addEventListener('click', function () {
+  if ($searchInput.value.length !== 0) {
+    $modalLink.textContent = data.currentEvent.name;
+    $modalLink.setAttribute('href', data.currentEvent.eventURL);
+  }
+});
+$saveButton.addEventListener('click', saveHandler);
