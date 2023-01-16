@@ -1,0 +1,11 @@
+* {
+  font-family: Roboto, sans-serif;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+img {
+  width: 100%;
+}
