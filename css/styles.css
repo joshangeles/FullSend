@@ -9,3 +9,8 @@ a:hover {
 img {
   width: 100%;
 }
+
+#no-events {
+  min-height: 50vh;
+  margin-top: 30vh;
+}
