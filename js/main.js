@@ -6,6 +6,9 @@ var $modalLink = document.querySelector('#modalLink');
 var $saveButton = document.querySelector('#saveButton');
 var $cancelButton = document.querySelector('#cancelButton');
 var $fullSendButton = document.querySelector('#fullSendButton');
+var $savedEventsLink = document.querySelector('#savedEventsLink');
+var $formView = document.querySelector('[data-view="form"]');
+var $listView = document.querySelector('[data-view="list"]');
 var validSearch = false;
 function toggleVisible(index) {
   if ($eventInfo[index].tagName === 'P') {
@@ -102,6 +105,7 @@ function saveHandler(event) {
   data.events.push(data.currentEvent);
   data.currentEvent = {};
 }
+
 $searchForm.addEventListener('submit', searchHandler);
 $fullSendButton.addEventListener('click', function () {
   if ($searchInput.value.length !== 0) {
@@ -109,8 +113,14 @@ $fullSendButton.addEventListener('click', function () {
     $modalLink.setAttribute('href', data.currentEvent.eventURL);
   }
 });
+
 $saveButton.addEventListener('click', saveHandler);
 $cancelButton.addEventListener('click', function () {
   resetInfo();
   data.currentEvent = {};
+});
+
+$savedEventsLink.addEventListener('click', function () {
+  $formView.className = 'container d-none';
+  $listView.className = 'container';
 });

@@ -18,13 +18,13 @@
         <nav class="navbar navbar-expand-md px-4">
           <div class="container-fluid">
             <h5 class="navbar-text text-white gy-0 mb-0">FullSend</h5>
-            <input type="button" value="Saved Events" class="navbar-text text-body-tertiary bg-body-secondary border-0"></input>
+            <input type="button" id="savedEventsLink" value="Saved Events" class="navbar-text text-body-tertiary bg-body-secondary border-0"></input>
         </nav>
       </div>
     </div>
   </header>
   <main class="bg-white">
-    <div class="container d-none" data-view="form">
+    <div class="container" data-view="form">
       <div class="row">
         <div class="col-12">
           <h4 class="text-black px-3 py-2 mt-2">
@@ -99,7 +99,7 @@
         </div>
       </div>
     </div>
-    <div class="container" data-view="list">
+    <div class="container d-none" data-view="list">
       <div class="row">
         <div class="col-12">
           <h4 class="text-black px-3 py-2 mt-2">
@@ -108,7 +108,7 @@
         </div>
       </div>
       <div class="row">
-        <div id="no-events" class="col-12 d-flex px-0 justify-content-around d-none">
+        <div id="no-events" class="col-12 d-flex px-0 justify-content-around">
           <p class="text-center">No events saved! Trying to save money?</p>
         </div>
       </div>
