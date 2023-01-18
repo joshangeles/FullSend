@@ -14,3 +14,7 @@ img {
   min-height: 50vh;
   margin-top: 30vh;
 }
+
+ul {
+  list-style: none;
+}
