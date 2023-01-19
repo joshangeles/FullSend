@@ -9,6 +9,7 @@ var $fullSendButton = document.querySelector('#fullSendButton');
 var $savedEventsLink = document.querySelector('#savedEventsLink');
 var $formView = document.querySelector('[data-view="form"]');
 var $listView = document.querySelector('[data-view="list"]');
+// var $saveList = document.querySelector('#saveList');
 var validSearch = false;
 function toggleVisible(index) {
   if ($eventInfo[index].tagName === 'P') {
@@ -166,12 +167,13 @@ function renderSavedEvent(savedEvent) {
   var $dateText = document.createElement('p');
   var $addNotesContainer = document.createElement('div');
   var $addNotesButton = document.createElement('button');
+  $saveListItem.setAttribute('class', 'mb-4');
   $itemCard.setAttribute('class', 'card bg-body-secondary border-rounded');
   $itemCard.setAttribute('data-bs-theme', 'dark');
   $itemTitleImageContainer.setAttribute('class', 'container gx-0');
   $itemTitleImageRow.setAttribute('class', 'row');
   $itemTitleCol.setAttribute('class', 'col');
-  $itemTitle.setAttribute('class', 'card-title text-white ps-3 py-3 my-0 d-inline-block');
+  $itemTitle.setAttribute('class', 'text-black');
   $itemExitCol.setAttribute('class', 'col-1');
   $itemExitButton.setAttribute('class', 'text-white text-end bg-transparent border-transparent border-0 px-3 py-2 float-end');
   $savedImage.setAttribute('class', 'card-img-top object-fit-cover');
@@ -179,7 +181,7 @@ function renderSavedEvent(savedEvent) {
   $itemInfoContainer.setAttribute('class', 'container');
   $infoContainerRow.setAttribute('class', 'row bg-white pt-3 px-1');
   $infoContainerCol.setAttribute('class', 'col');
-  $infoTitle.setAttribute('class', 'text-black');
+  $infoTitle.setAttribute('class', 'card-title text-white ps-2 py-3 my-0 d-inline-block');
   $artistRow.setAttribute('class', 'row pt-md-1');
   $artistLabelCol.setAttribute('class', 'col-4');
   $artistTextCol.setAttribute('class', 'col-8');
@@ -204,7 +206,7 @@ function renderSavedEvent(savedEvent) {
   $addNotesContainer.setAttribute('class', 'd-grid gap-0');
   $addNotesButton.setAttribute('class', 'text-white bg-secondary border-0 rounded-bottom');
   $addNotesButton.setAttribute('type', 'button');
-  $infoTitle.textContent = 'Dabin';
+  $infoTitle.textContent = savedEvent.name;
   $itemExitButton.textContent = 'X';
   $itemTitle.textContent = 'Event Information:';
   $artistLabel.textContent = 'Artist:';
