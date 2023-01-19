@@ -175,7 +175,7 @@ function renderSavedEvent(savedEvent) {
   $itemExitCol.setAttribute('class', 'col-1');
   $itemExitButton.setAttribute('class', 'text-white text-end bg-transparent border-transparent border-0 px-3 py-2 float-end');
   $savedImage.setAttribute('class', 'card-img-top object-fit-cover');
-  $savedImage.setAttribute('src', savedEvent.imageURL); // need to change
+  $savedImage.setAttribute('src', savedEvent.imageURL);
   $itemInfoContainer.setAttribute('class', 'container');
   $infoContainerRow.setAttribute('class', 'row bg-white pt-3 px-1');
   $infoContainerCol.setAttribute('class', 'col');
@@ -222,7 +222,7 @@ function renderSavedEvent(savedEvent) {
   $itemTitleImageContainer.appendChild($itemTitleImageRow);
   $itemTitleImageRow.appendChild($itemTitleCol);
   $itemTitleCol.appendChild($itemTitle);
-  $itemTitleImageContainer.appendChild($itemExitCol);
+  $itemTitleImageRow.appendChild($itemExitCol);
   $itemExitCol.appendChild($itemExitButton);
   $itemCard.appendChild($savedImage);
   $itemCard.appendChild($itemInfoContainer);
@@ -237,6 +237,8 @@ function renderSavedEvent(savedEvent) {
   $infoContainerCol.appendChild($nameRow);
   $nameRow.appendChild($nameLabelCol);
   $nameLabelCol.appendChild($nameLabel);
+  $nameRow.appendChild($nameAnchorCol);
+  $nameAnchorCol.appendChild($nameAnchor);
   $infoContainerCol.appendChild($venueRow);
   $venueRow.appendChild($venueLabelCol);
   $venueLabelCol.appendChild($venueLabel);
@@ -254,6 +256,7 @@ function renderSavedEvent(savedEvent) {
   $dateTextCol.appendChild($dateText);
   $itemCard.appendChild($addNotesContainer);
   $addNotesContainer.appendChild($addNotesButton);
+  $addNotesButton.textContent = 'Add Notes...';
   return $saveListItem;
 }
 
