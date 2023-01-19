@@ -204,7 +204,7 @@ function renderSavedEvent(savedEvent) {
   $addNotesContainer.setAttribute('class', 'd-grid gap-0');
   $addNotesButton.setAttribute('class', 'text-white bg-secondary border-0 rounded-bottom');
   $addNotesButton.setAttribute('type', 'button');
-  $infoTitle.textContent = savedEvent.name;
+  $infoTitle.textContent = 'Dabin';
   $itemExitButton.textContent = 'X';
   $itemTitle.textContent = 'Event Information:';
   $artistLabel.textContent = 'Artist:';
@@ -221,7 +221,7 @@ function renderSavedEvent(savedEvent) {
   $itemCard.appendChild($itemTitleImageContainer);
   $itemTitleImageContainer.appendChild($itemTitleImageRow);
   $itemTitleImageRow.appendChild($itemTitleCol);
-  $itemTitleCol.appendChild($itemTitle);
+  $itemTitleCol.appendChild($infoTitle);
   $itemTitleImageRow.appendChild($itemExitCol);
   $itemExitCol.appendChild($itemExitButton);
   $itemCard.appendChild($savedImage);
