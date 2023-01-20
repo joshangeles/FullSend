@@ -217,6 +217,9 @@ function renderSavedEvent(savedEvent) {
   $addNotesContainer.setAttribute('class', 'd-grid gap-0');
   $addNotesButton.setAttribute('class', 'text-white bg-secondary border-0 rounded-bottom');
   $addNotesButton.setAttribute('type', 'button');
+  $addNotesButton.setAttribute('id', 'notesModalButton-' + savedEvent.eventId);
+  $addNotesButton.setAttribute('data-bs-toggle', 'modal');
+  $addNotesButton.setAttribute('data-bs-target', '#notesModal');
   $infoTitle.textContent = savedEvent.name;
   $itemExitButton.textContent = 'X';
   $itemTitle.textContent = 'Event Information:';
