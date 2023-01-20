@@ -151,19 +151,23 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-body">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-6 pt-2 pb-2">
-                  <h5 class="fw-bold modal-title text-black text-start mb-3" id="notesModalLabel">Notes:</h5>
-                  <button type="submit">SAVE</button>
+            <form id="notesForm">
+              <div class="container-fluid gy-0">
+                <div class="row">
+                  <div class="col-6 pt-2 pb-2">
+                    <h5 class="fw-bold modal-title text-black text-start mb-3 d-inline" id="notesModalLabel">Notes:</h5>
+                  </div>
+                  <div class="col-6 pt-2 pb-2">
+                    <button type="submit" id="notesButton" class="border border-0 text-white bg-success rounded px-4 py-1 float-end">SAVE</button>
+                  </div>
                 </div>
                 <div class="row">
-                  <div class="col">
-                    <textarea placeholder="Enter notes..."></textarea>
+                  <div class="col-12">
+                    <textarea required placeholder="Enter notes..." class="rounded"></textarea>
                   </div>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
