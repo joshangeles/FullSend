@@ -280,3 +280,9 @@ window.addEventListener('DOMContentLoaded', function () {
     $noneSavedMessage.className = 'col-12 d-flex px-0 justify-content-around d-none';
   }
 });
+
+var $newButton = document.querySelector('#newButton');
+$newButton.addEventListener('click', function () {
+  $formView.className = 'container';
+  $listView.className = 'container d-none';
+});
