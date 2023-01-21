@@ -200,7 +200,7 @@ function renderSavedEvent(savedEvent) {
   $nameRow.setAttribute('class', 'row pt-md-1');
   $nameLabelCol.setAttribute('class', 'col-4');
   $nameAnchorCol.setAttribute('class', 'col-8');
-  $nameAnchor.setAttribute('class', 'float-end');
+  $nameAnchor.setAttribute('class', 'float-end text-end');
   $nameAnchor.setAttribute('href', savedEvent.eventURL);
   $venueRow.setAttribute('class', 'row pt-md-1');
   $venueLabelCol.setAttribute('class', 'col-4');
