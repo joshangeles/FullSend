@@ -289,3 +289,10 @@ $newButton.addEventListener('click', function () {
   $formView.className = 'container';
   $listView.className = 'container d-none';
 });
+
+// var $notes = document.querySelector('#notesArea');
+var $notesForm = document.querySelector('#notesForm');
+$notesForm.addEventListener('submit', function (event) {
+  event.preventDefault();
+  // console.log($notes.value);
+});
