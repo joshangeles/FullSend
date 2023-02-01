@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 var $searchForm = document.querySelector('#searchForm');
 var $searchInput = $searchForm.querySelector('#searchInput');
 var $previewImage = document.querySelector('#previewImage');
@@ -12,6 +13,7 @@ var $listView = document.querySelector('[data-view="list"]');
 var $saveList = document.querySelector('#saveList');
 var $noneSavedMessage = document.querySelector('#no-events');
 var validSearch = false;
+
 function toggleVisible(index) {
   if ($eventInfo[index].tagName === 'P') {
     if ($eventInfo[index].className === 'data-placeholder text-black text-end visible') {
@@ -178,6 +180,21 @@ function renderSavedEvent(savedEvent) {
   var $dateText = document.createElement('p');
   var $addNotesContainer = document.createElement('div');
   var $addNotesButton = document.createElement('button');
+  var $notesModalOverlay = document.createElement('div');
+  var $notesModalDialogue = document.createElement('div');
+  var $notesModalContent = document.createElement('div');
+  var $notesModalBody = document.createElement('div');
+  var $notesModalForm = document.createElement('form');
+  var $notesModalFormContainer = document.createElement('div');
+  var $notesModalFormHeaderButtonRow = document.createElement('div');
+  var $notesModalFormHeaderColumn = document.createElement('div');
+  var $notesModalFormHeader = document.createElement('h5');
+  var $notesModalFormButtonColumn = document.createElement('div');
+  var $notesModalButton = document.createElement('button');
+  var $notesModalFormTextAreaRow = document.createElement('div');
+  var $notesModalFormTextAreaColumn = document.createElement('div');
+  var $notesModalFormTextArea = document.createElement('textarea');
+
   $saveListItem.setAttribute('class', 'mb-4');
   $itemCard.setAttribute('class', 'card bg-body-secondary border-rounded');
   $itemCard.setAttribute('data-bs-theme', 'dark');
@@ -217,7 +234,7 @@ function renderSavedEvent(savedEvent) {
   $addNotesContainer.setAttribute('class', 'd-grid gap-0');
   $addNotesButton.setAttribute('class', 'text-white bg-secondary border-0 rounded-bottom');
   $addNotesButton.setAttribute('type', 'button');
-  $addNotesButton.setAttribute('id', 'notesModalButton-' + savedEvent.eventId);
+  $addNotesButton.setAttribute('id', 'notesModalButton');
   $addNotesButton.setAttribute('data-bs-toggle', 'modal');
   $addNotesButton.setAttribute('data-bs-target', '#notesModal');
   $infoTitle.textContent = savedEvent.name;
@@ -290,9 +307,10 @@ $newButton.addEventListener('click', function () {
   $listView.className = 'container d-none';
 });
 
-// var $notes = document.querySelector('#notesArea');
+var $notes = document.querySelector('#notesArea');
 var $notesForm = document.querySelector('#notesForm');
 $notesForm.addEventListener('submit', function (event) {
   event.preventDefault();
   // console.log($notes.value);
+
 });
