@@ -299,6 +299,7 @@ window.addEventListener('DOMContentLoaded', function () {
     $saveList.appendChild(eventDOMTree);
     $noneSavedMessage.className = 'col-12 d-flex px-0 justify-content-around d-none';
   }
+  $notes.value = data.notes; // universal notes
 });
 
 var $newButton = document.querySelector('#newButton');
@@ -309,8 +310,9 @@ $newButton.addEventListener('click', function () {
 
 var $notes = document.querySelector('#notesArea');
 var $notesForm = document.querySelector('#notesForm');
+
 $notesForm.addEventListener('submit', function (event) {
   event.preventDefault();
-  // console.log($notes.value);
+  data.notes = $notes.value;
 
 });
