@@ -12,6 +12,7 @@ var $formView = document.querySelector('[data-view="form"]');
 var $listView = document.querySelector('[data-view="list"]');
 var $saveList = document.querySelector('#saveList');
 var $noneSavedMessage = document.querySelector('#no-events');
+var $alert = document.querySelector('div.alert');
 var validSearch = false;
 
 function toggleVisible(index) {
@@ -38,6 +39,11 @@ function searchHandler(event, name) {
   xhr.open('GET', 'https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey=r3mO1M5MAEVbprAB3NakjYfqW8q0obAh&sort=date,asc&keyword=' + name.replace(' ', '_'));
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    if (!xhr.response._embedded) {
+      $alert.className = 'alert alert-danger';
+      return;
+    }
+    $alert.className = 'alert alert-danger d-none';
     if ('attractions' in xhr.response._embedded.events[0]._embedded) {
       data.currentEvent.artist = xhr.response._embedded.events[0]._embedded.attractions[0].name;
     } else {
@@ -196,6 +202,7 @@ function renderSavedEvent(savedEvent) {
   var $notesModalFormTextArea = document.createElement('textarea');
 
   $saveListItem.setAttribute('class', 'mb-4');
+  $saveListItem.setAttribute('id', savedEvent.eventId);
   $itemCard.setAttribute('class', 'card bg-body-secondary border-rounded');
   $itemCard.setAttribute('data-bs-theme', 'dark');
   $itemTitleImageContainer.setAttribute('class', 'container gx-0');
@@ -203,6 +210,7 @@ function renderSavedEvent(savedEvent) {
   $itemTitleCol.setAttribute('class', 'col');
   $itemTitle.setAttribute('class', 'text-black');
   $itemExitCol.setAttribute('class', 'col-1');
+  $itemExitButton.setAttribute('class', 'text-white text-end bg-transparent border-transparent border-0 px-3 py-2 float-end');
   $itemExitButton.setAttribute('class', 'text-white text-end bg-transparent border-transparent border-0 px-3 py-2 float-end');
   $savedImage.setAttribute('class', 'card-img-top object-fit-cover');
   $savedImage.setAttribute('src', savedEvent.imageURL);
