@@ -300,7 +300,7 @@ window.addEventListener('DOMContentLoaded', function () {
     $noneSavedMessage.className = 'col-12 d-flex px-0 justify-content-around d-none';
   }
   if (data.notes) {
-    $notes.value = data.notes;
+    $notes.value = data.notes; // universal notes
   }
 });
 
