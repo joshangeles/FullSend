@@ -152,8 +152,6 @@ function renderSavedEvent(savedEvent) {
   var $itemTitleImageRow = document.createElement('div');
   var $itemTitleCol = document.createElement('div');
   var $itemTitle = document.createElement('h4');
-  var $itemExitCol = document.createElement('div');
-  var $itemExitButton = document.createElement('button');
   var $savedImage = document.createElement('img');
   var $itemInfoContainer = document.createElement('div');
   var $infoContainerRow = document.createElement('div');
@@ -209,9 +207,6 @@ function renderSavedEvent(savedEvent) {
   $itemTitleImageRow.setAttribute('class', 'row');
   $itemTitleCol.setAttribute('class', 'col');
   $itemTitle.setAttribute('class', 'text-black');
-  $itemExitCol.setAttribute('class', 'col-1');
-  $itemExitButton.setAttribute('class', 'text-white text-end bg-transparent border-transparent border-0 px-3 py-2 float-end');
-  $itemExitButton.setAttribute('class', 'text-white text-end bg-transparent border-transparent border-0 px-3 py-2 float-end');
   $savedImage.setAttribute('class', 'card-img-top object-fit-cover');
   $savedImage.setAttribute('src', savedEvent.imageURL);
   $itemInfoContainer.setAttribute('class', 'container');
@@ -246,7 +241,6 @@ function renderSavedEvent(savedEvent) {
   $addNotesButton.setAttribute('data-bs-toggle', 'modal');
   $addNotesButton.setAttribute('data-bs-target', '#notesModal');
   $infoTitle.textContent = savedEvent.name;
-  $itemExitButton.textContent = 'X';
   $itemTitle.textContent = 'Event Information:';
   $artistLabel.textContent = 'Artist:';
   $artistText.textContent = savedEvent.artist;
@@ -263,8 +257,6 @@ function renderSavedEvent(savedEvent) {
   $itemTitleImageContainer.appendChild($itemTitleImageRow);
   $itemTitleImageRow.appendChild($itemTitleCol);
   $itemTitleCol.appendChild($infoTitle);
-  $itemTitleImageRow.appendChild($itemExitCol);
-  $itemExitCol.appendChild($itemExitButton);
   $itemCard.appendChild($savedImage);
   $itemCard.appendChild($itemInfoContainer);
   $itemInfoContainer.appendChild($infoContainerRow);
