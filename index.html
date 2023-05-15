@@ -14,7 +14,7 @@
 <body>
   <header class="bg-body-secondary" data-bs-theme="dark">
     <div class="container">
-      <div class="row gx-5">
+      <div class="row">
         <nav class="navbar navbar-expand-md px-4">
           <div class="container-fluid">
             <h5 class="navbar-text text-white gy-0 mb-0">FullSend</h5>
@@ -24,7 +24,7 @@
     </div>
   </header>
   <main class="bg-white">
-    <div class="container d-non" data-view="form">
+    <div class="container-fluid" data-view="form">
       <div class="row">
         <div class="col-12">
           <h4 class="text-black px-3 py-2 mt-2">
@@ -36,13 +36,17 @@
         <div class="col-12">
           <div class="container-fluid">
             <div class="row mb-4">
-              <div class="col-sm pe-md-5 overflow-auto">
+              <div class="col-sm pe-md-2 overflow-auto">
                 <img id="previewImage" class="object-fit-contain img-fluid" src="https://www.caliberwealthmanagement.com/images/placeholder-rectangle.png">
               </div>
               <div class="col ps-md-5">
                 <form id="searchForm" class="mt-3 mt-md-0">
                   <label for="searchInput" class="text-black fw-semibold mt-2 mt-sm-0">Sending it to...</label>
                   <input required id="searchInput" class="text-black fw-normal form-control bg-white mt-2 mb-3" type="text" placeholder="Enter Artist...">
+                  <div class="alert alert-danger d-none" role="alert">
+                    No artist found! Try different term? <br>
+                    【=◈︿◈=】
+                  </div>
                   <div class="d-grid col-2 col-sm-12">
                     <button id="searchButton" class="text-white bg-secondary border-0 rounded px-4 py-1 py-md-2" type="submit" value="Search">Search</button>
                   </div>
@@ -143,6 +147,31 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="notesModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="notesModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form id="notesForm">
+              <div class="container-fluid gy-0">
+                <div class="row">
+                  <div class="col-6 pt-2 pb-2">
+                    <h5 class="fw-bold modal-title text-black text-start mb-3 d-inline" id="notesModalLabel">Notes:</h5>
+                  </div>
+                  <div class="col-6 pt-2 pb-2">
+                    <button type="submit" id="notesButton" class="border border-0 text-white bg-success rounded px-4 py-1 float-end">SAVE</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <textarea id="notesArea" required placeholder="Enter notes..." class="rounded"></textarea>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>

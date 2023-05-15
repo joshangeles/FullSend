@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 var $searchForm = document.querySelector('#searchForm');
 var $searchInput = $searchForm.querySelector('#searchInput');
 var $previewImage = document.querySelector('#previewImage');
@@ -11,7 +12,9 @@ var $formView = document.querySelector('[data-view="form"]');
 var $listView = document.querySelector('[data-view="list"]');
 var $saveList = document.querySelector('#saveList');
 var $noneSavedMessage = document.querySelector('#no-events');
+var $alert = document.querySelector('div.alert');
 var validSearch = false;
+
 function toggleVisible(index) {
   if ($eventInfo[index].tagName === 'P') {
     if ($eventInfo[index].className === 'data-placeholder text-black text-end visible') {
@@ -36,6 +39,11 @@ function searchHandler(event, name) {
   xhr.open('GET', 'https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey=r3mO1M5MAEVbprAB3NakjYfqW8q0obAh&sort=date,asc&keyword=' + name.replace(' ', '_'));
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    if (!xhr.response._embedded) {
+      $alert.className = 'alert alert-danger';
+      return;
+    }
+    $alert.className = 'alert alert-danger d-none';
     if ('attractions' in xhr.response._embedded.events[0]._embedded) {
       data.currentEvent.artist = xhr.response._embedded.events[0]._embedded.attractions[0].name;
     } else {
@@ -144,8 +152,6 @@ function renderSavedEvent(savedEvent) {
   var $itemTitleImageRow = document.createElement('div');
   var $itemTitleCol = document.createElement('div');
   var $itemTitle = document.createElement('h4');
-  var $itemExitCol = document.createElement('div');
-  var $itemExitButton = document.createElement('button');
   var $savedImage = document.createElement('img');
   var $itemInfoContainer = document.createElement('div');
   var $infoContainerRow = document.createElement('div');
@@ -178,15 +184,29 @@ function renderSavedEvent(savedEvent) {
   var $dateText = document.createElement('p');
   var $addNotesContainer = document.createElement('div');
   var $addNotesButton = document.createElement('button');
+  var $notesModalOverlay = document.createElement('div');
+  var $notesModalDialogue = document.createElement('div');
+  var $notesModalContent = document.createElement('div');
+  var $notesModalBody = document.createElement('div');
+  var $notesModalForm = document.createElement('form');
+  var $notesModalFormContainer = document.createElement('div');
+  var $notesModalFormHeaderButtonRow = document.createElement('div');
+  var $notesModalFormHeaderColumn = document.createElement('div');
+  var $notesModalFormHeader = document.createElement('h5');
+  var $notesModalFormButtonColumn = document.createElement('div');
+  var $notesModalButton = document.createElement('button');
+  var $notesModalFormTextAreaRow = document.createElement('div');
+  var $notesModalFormTextAreaColumn = document.createElement('div');
+  var $notesModalFormTextArea = document.createElement('textarea');
+
   $saveListItem.setAttribute('class', 'mb-4');
+  $saveListItem.setAttribute('id', savedEvent.eventId);
   $itemCard.setAttribute('class', 'card bg-body-secondary border-rounded');
   $itemCard.setAttribute('data-bs-theme', 'dark');
   $itemTitleImageContainer.setAttribute('class', 'container gx-0');
   $itemTitleImageRow.setAttribute('class', 'row');
   $itemTitleCol.setAttribute('class', 'col');
   $itemTitle.setAttribute('class', 'text-black');
-  $itemExitCol.setAttribute('class', 'col-1');
-  $itemExitButton.setAttribute('class', 'text-white text-end bg-transparent border-transparent border-0 px-3 py-2 float-end');
   $savedImage.setAttribute('class', 'card-img-top object-fit-cover');
   $savedImage.setAttribute('src', savedEvent.imageURL);
   $itemInfoContainer.setAttribute('class', 'container');
@@ -200,7 +220,7 @@ function renderSavedEvent(savedEvent) {
   $nameRow.setAttribute('class', 'row pt-md-1');
   $nameLabelCol.setAttribute('class', 'col-4');
   $nameAnchorCol.setAttribute('class', 'col-8');
-  $nameAnchor.setAttribute('class', 'float-end');
+  $nameAnchor.setAttribute('class', 'float-end text-end');
   $nameAnchor.setAttribute('href', savedEvent.eventURL);
   $venueRow.setAttribute('class', 'row pt-md-1');
   $venueLabelCol.setAttribute('class', 'col-4');
@@ -217,8 +237,10 @@ function renderSavedEvent(savedEvent) {
   $addNotesContainer.setAttribute('class', 'd-grid gap-0');
   $addNotesButton.setAttribute('class', 'text-white bg-secondary border-0 rounded-bottom');
   $addNotesButton.setAttribute('type', 'button');
+  $addNotesButton.setAttribute('id', 'notesModalButton');
+  $addNotesButton.setAttribute('data-bs-toggle', 'modal');
+  $addNotesButton.setAttribute('data-bs-target', '#notesModal');
   $infoTitle.textContent = savedEvent.name;
-  $itemExitButton.textContent = 'X';
   $itemTitle.textContent = 'Event Information:';
   $artistLabel.textContent = 'Artist:';
   $artistText.textContent = savedEvent.artist;
@@ -235,8 +257,6 @@ function renderSavedEvent(savedEvent) {
   $itemTitleImageContainer.appendChild($itemTitleImageRow);
   $itemTitleImageRow.appendChild($itemTitleCol);
   $itemTitleCol.appendChild($infoTitle);
-  $itemTitleImageRow.appendChild($itemExitCol);
-  $itemExitCol.appendChild($itemExitButton);
   $itemCard.appendChild($savedImage);
   $itemCard.appendChild($itemInfoContainer);
   $itemInfoContainer.appendChild($infoContainerRow);
@@ -279,10 +299,22 @@ window.addEventListener('DOMContentLoaded', function () {
     $saveList.appendChild(eventDOMTree);
     $noneSavedMessage.className = 'col-12 d-flex px-0 justify-content-around d-none';
   }
+  if (data.notes) {
+    $notes.value = data.notes; // universal notes
+  }
 });
 
 var $newButton = document.querySelector('#newButton');
 $newButton.addEventListener('click', function () {
   $formView.className = 'container';
   $listView.className = 'container d-none';
+});
+
+var $notes = document.querySelector('#notesArea');
+var $notesForm = document.querySelector('#notesForm');
+
+$notesForm.addEventListener('submit', function (event) {
+  event.preventDefault();
+  data.notes = $notes.value;
+
 });
