@@ -299,7 +299,9 @@ window.addEventListener('DOMContentLoaded', function () {
     $saveList.appendChild(eventDOMTree);
     $noneSavedMessage.className = 'col-12 d-flex px-0 justify-content-around d-none';
   }
-  $notes.value = data.notes; // universal notes
+  if (data.notes) {
+    $notes.value = data.notes; // universal notes
+  }
 });
 
 var $newButton = document.querySelector('#newButton');
