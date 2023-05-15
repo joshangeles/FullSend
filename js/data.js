@@ -12,6 +12,11 @@ window.addEventListener('beforeunload', function () {
   this.localStorage.setItem('eventData', eventDataJSON);
 });
 
+window.addEventListener('pagehide', function () {
+  var eventDataJSON = JSON.stringify(data);
+  this.localStorage.setItem('eventData', eventDataJSON);
+});
+
 var savedData = window.localStorage.getItem('eventData');
 if (savedData !== null) {
   data = JSON.parse(savedData);

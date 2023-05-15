@@ -30,11 +30,7 @@ ul {
 }
 
 @media screen and (min-width: 992px) {
-  header {
-    padding-left: 20rem;
-    padding-right: 20rem;
-  }
-
+  header,
   main {
     padding-left: 20rem;
     padding-right: 20rem;
