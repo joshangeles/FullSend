@@ -1,3 +1,3 @@
-# ajax-project
+# Full-Send
 
-A dynamic HTML, CSS, and JavaScript solo project.
+An app for concert-goers to plan their next show.
