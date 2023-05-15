@@ -1,3 +1,3 @@
-# FullSend
+# Full-Send
 
-An application for concert-goers to plan their next event.
+An app for concert-goers to plan their next show.
