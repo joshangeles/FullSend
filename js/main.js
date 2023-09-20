@@ -289,7 +289,9 @@ function renderSavedEvent(savedEvent) {
   $dateTextCol.appendChild($dateText);
   $itemCard.appendChild($addNotesContainer);
   $addNotesContainer.appendChild($addNotesButton);
-  $addNotesButton.textContent = 'Add Notes...';
+  data.notes.length > 0
+    ? $addNotesButton.textContent = 'View Notes'
+    : $addNotesButton.textContent = 'Add Notes';
   return $saveListItem;
 }
 
@@ -316,5 +318,4 @@ var $notesForm = document.querySelector('#notesForm');
 $notesForm.addEventListener('submit', function (event) {
   event.preventDefault();
   data.notes = $notes.value;
-
 });
