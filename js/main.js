@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 var $searchForm = document.querySelector('#searchForm');
 var $searchInput = $searchForm.querySelector('#searchInput');
@@ -145,6 +146,8 @@ $savedEventsLink.addEventListener('click', function () {
   $listView.className = 'container';
 });
 
+let selectedCard = null; // contains the ID of the card that triggered the notes modal
+
 function renderSavedEvent(savedEvent) {
   var $saveListItem = document.createElement('li');
   var $itemCard = document.createElement('div');
@@ -289,9 +292,13 @@ function renderSavedEvent(savedEvent) {
   $dateTextCol.appendChild($dateText);
   $itemCard.appendChild($addNotesContainer);
   $addNotesContainer.appendChild($addNotesButton);
-  data.notes.length > 0
+  data?.notes?.length > 0
     ? $addNotesButton.textContent = 'View Notes'
-    : $addNotesButton.textContent = 'Add Notes';
+    : $addNotesButton.textContent = 'Add Notes...';
+  $addNotesButton.addEventListener('click', () => {
+    selectedCard = savedEvent.eventId;
+    console.log(selectedCard); // remove after implementation
+  });
   return $saveListItem;
 }
 
@@ -300,9 +307,16 @@ window.addEventListener('DOMContentLoaded', function () {
     var eventDOMTree = renderSavedEvent(data.events[i]);
     $saveList.appendChild(eventDOMTree);
     $noneSavedMessage.className = 'col-12 d-flex px-0 justify-content-around d-none';
+    const currentNote = data.events[i].notes;
+    if (currentNote) {
+      console.log(currentNote);
+
+    }
   }
   if (data.notes) {
     $notes.value = data.notes; // universal notes
+    // change after implementing line 328
+
   }
 });
 
@@ -317,5 +331,7 @@ var $notesForm = document.querySelector('#notesForm');
 
 $notesForm.addEventListener('submit', function (event) {
   event.preventDefault();
-  data.notes = $notes.value;
+  const foundEvent = data.events.find(card => card.eventId === selectedCard);
+  const notesIndex = data.events.findIndex(event => event.eventId === foundEvent.eventId);
+  data.events[notesIndex].notes = $notes.value;
 });
