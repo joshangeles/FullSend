@@ -122,7 +122,7 @@ function saveHandler(event) {
   data.currentEvent.eventId = data.nextEventId;
   data.nextEventId++;
   data.events.push(data.currentEvent);
-  $saveList.prepend(renderSavedEvent(data.currentEvent));
+  $saveList.append(renderSavedEvent(data.currentEvent));
   $noneSavedMessage.className = 'col-12 d-flex px-0 justify-content-around d-none';
   data.currentEvent = {};
 }
@@ -203,7 +203,7 @@ function renderSavedEvent(savedEvent) {
   var $notesModalFormTextArea = document.createElement('textarea');
 
   $saveListItem.setAttribute('class', 'mb-4');
-  $saveListItem.setAttribute('id', savedEvent.eventId);
+  $saveListItem.setAttribute('id', 'c' + savedEvent.eventId);
   $itemCard.setAttribute('class', 'card bg-body-secondary border-rounded');
   $itemCard.setAttribute('data-bs-theme', 'dark');
   $itemTitleImageContainer.setAttribute('class', 'container gx-0');
@@ -292,12 +292,14 @@ function renderSavedEvent(savedEvent) {
   $dateTextCol.appendChild($dateText);
   $itemCard.appendChild($addNotesContainer);
   $addNotesContainer.appendChild($addNotesButton);
-  data?.notes?.length > 0
+  savedEvent?.notes?.length > 0
     ? $addNotesButton.textContent = 'View Notes'
     : $addNotesButton.textContent = 'Add Notes...';
   $addNotesButton.addEventListener('click', () => {
     selectedCard = savedEvent.eventId;
-    console.log(selectedCard); // remove after implementation
+    if (selectedCard && savedEvent.notes) {
+      $notes.value = savedEvent.notes;
+    }
   });
   return $saveListItem;
 }
@@ -309,14 +311,8 @@ window.addEventListener('DOMContentLoaded', function () {
     $noneSavedMessage.className = 'col-12 d-flex px-0 justify-content-around d-none';
     const currentNote = data.events[i].notes;
     if (currentNote) {
-      console.log(currentNote);
-
+      $notes.value = currentNote;
     }
-  }
-  if (data.notes) {
-    $notes.value = data.notes; // universal notes
-    // change after implementing line 328
-
   }
 });
 
@@ -334,4 +330,8 @@ $notesForm.addEventListener('submit', function (event) {
   const foundEvent = data.events.find(card => card.eventId === selectedCard);
   const notesIndex = data.events.findIndex(event => event.eventId === foundEvent.eventId);
   data.events[notesIndex].notes = $notes.value;
+  if (selectedCard) {
+    const triggeredButton = document.querySelector(`li#c${selectedCard} > div.card > div.d-grid > button`);
+    triggeredButton.textContent = 'View Notes';
+  }
 });
