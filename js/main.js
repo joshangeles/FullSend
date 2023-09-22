@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 var $searchForm = document.querySelector('#searchForm');
 var $searchInput = $searchForm.querySelector('#searchInput');
@@ -121,7 +122,7 @@ function saveHandler(event) {
   data.currentEvent.eventId = data.nextEventId;
   data.nextEventId++;
   data.events.push(data.currentEvent);
-  $saveList.prepend(renderSavedEvent(data.currentEvent));
+  $saveList.append(renderSavedEvent(data.currentEvent));
   $noneSavedMessage.className = 'col-12 d-flex px-0 justify-content-around d-none';
   data.currentEvent = {};
 }
@@ -144,6 +145,8 @@ $savedEventsLink.addEventListener('click', function () {
   $formView.className = 'container d-none';
   $listView.className = 'container';
 });
+
+let selectedCard = null; // contains the ID of the card that triggered the notes modal
 
 function renderSavedEvent(savedEvent) {
   var $saveListItem = document.createElement('li');
@@ -200,7 +203,7 @@ function renderSavedEvent(savedEvent) {
   var $notesModalFormTextArea = document.createElement('textarea');
 
   $saveListItem.setAttribute('class', 'mb-4');
-  $saveListItem.setAttribute('id', savedEvent.eventId);
+  $saveListItem.setAttribute('id', 'c' + savedEvent.eventId);
   $itemCard.setAttribute('class', 'card bg-body-secondary border-rounded');
   $itemCard.setAttribute('data-bs-theme', 'dark');
   $itemTitleImageContainer.setAttribute('class', 'container gx-0');
@@ -289,7 +292,15 @@ function renderSavedEvent(savedEvent) {
   $dateTextCol.appendChild($dateText);
   $itemCard.appendChild($addNotesContainer);
   $addNotesContainer.appendChild($addNotesButton);
-  $addNotesButton.textContent = 'Add Notes...';
+  savedEvent?.notes?.length > 0
+    ? $addNotesButton.textContent = 'View Notes'
+    : $addNotesButton.textContent = 'Add Notes...';
+  $addNotesButton.addEventListener('click', () => {
+    selectedCard = savedEvent.eventId;
+    if (selectedCard && savedEvent.notes) {
+      $notes.value = savedEvent.notes;
+    }
+  });
   return $saveListItem;
 }
 
@@ -298,9 +309,10 @@ window.addEventListener('DOMContentLoaded', function () {
     var eventDOMTree = renderSavedEvent(data.events[i]);
     $saveList.appendChild(eventDOMTree);
     $noneSavedMessage.className = 'col-12 d-flex px-0 justify-content-around d-none';
-  }
-  if (data.notes) {
-    $notes.value = data.notes; // universal notes
+    const currentNote = data.events[i].notes;
+    if (currentNote) {
+      $notes.value = currentNote;
+    }
   }
 });
 
@@ -315,6 +327,11 @@ var $notesForm = document.querySelector('#notesForm');
 
 $notesForm.addEventListener('submit', function (event) {
   event.preventDefault();
-  data.notes = $notes.value;
-
+  const foundEvent = data.events.find(card => card.eventId === selectedCard);
+  const notesIndex = data.events.findIndex(event => event.eventId === foundEvent.eventId);
+  data.events[notesIndex].notes = $notes.value;
+  if (selectedCard) {
+    const triggeredButton = document.querySelector(`li#c${selectedCard} > div.card > div.d-grid > button`);
+    triggeredButton.textContent = 'View Notes';
+  }
 });
